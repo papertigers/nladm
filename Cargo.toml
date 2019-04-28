@@ -1,0 +1,22 @@
+[package]
+name = "nladm"
+version = "0.1.0"
+description = "Cli interface to interact with NanoLeaf Devices"
+repository = "https://github.com/papertigers/nladm"
+keywords = ["nanoleaf", "cli", "home-automation", "lights"]
+authors = ["Mike Zeller <mike@mikezeller.net>"]
+edition = "2018"
+license = "MIT"
+categories = [
+	"command-line-utilities"
+]
+
+[dependencies]
+nanoleaf = "0.1"
+serde = { version = "1.0", features = ["derive"] }
+structopt = "0.2"
+tokio = "0.1"
+failure = "0.1"
+futures = "0.1"
+toml = "0.5"
+dirs = "1.0"
