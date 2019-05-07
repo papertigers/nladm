@@ -28,10 +28,10 @@ enum Command {
     /// Get panel information
     Info,
     #[structopt(name = "state")]
-    /// Panel state
+    /// Get or set Panel state
     State(state::State),
     #[structopt(name = "effects")]
-    /// Panel effects
+    /// Get the current panel effect or set one
     Effects(effects::Effects),
     #[structopt(name = "user")]
     /// Add/Remove Users
