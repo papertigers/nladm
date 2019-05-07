@@ -1,6 +1,6 @@
 [package]
 name = "nladm"
-version = "0.1.0"
+version = "0.1.1"
 description = "Cli interface to interact with NanoLeaf Devices"
 repository = "https://github.com/papertigers/nladm"
 keywords = ["nanoleaf", "cli", "home-automation", "lights"]
