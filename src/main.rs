@@ -1,3 +1,4 @@
+mod brightness;
 mod cli;
 mod config;
 mod effects;

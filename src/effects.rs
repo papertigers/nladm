@@ -15,6 +15,9 @@ pub enum EffectsType {
     #[structopt(name = "list")]
     /// List all effects
     List,
+    #[structopt(name = "get")]
+    /// Get all effects and their values
+    Get,
     #[structopt(name = "set")]
     /// Set an effect
     Set {
@@ -36,8 +39,13 @@ pub fn handle_effect(
         match effect {
             EffectsType::List => {
                 return rt
-                    .block_on(c.get_all_effects(t))
+                    .block_on(c.list_effects(t))
                     .map(|v| v.iter().for_each(|e| println!("{}", e)))
+            }
+            EffectsType::Get => {
+                return rt
+                    .block_on(c.get_all_effects(t))
+                    .map(|v| v.animations.iter().for_each(|e| println!("{:#?}", e)))
             }
             EffectsType::Set { effect, brightness } => {
                 let effect = c.set_effect(t, &effect);

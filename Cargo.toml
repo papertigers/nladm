@@ -1,7 +1,7 @@
 [package]
 name = "nladm"
 version = "0.1.1"
-description = "Cli interface to interact with NanoLeaf Devices"
+description = "List Plex activity via a Tautulli (Plexpy) Server"
 repository = "https://github.com/papertigers/nladm"
 keywords = ["nanoleaf", "cli", "home-automation", "lights"]
 authors = ["Mike Zeller <mike@mikezeller.net>"]
@@ -12,7 +12,7 @@ categories = [
 ]
 
 [dependencies]
-nanoleaf = "0.1"
+nanoleaf = { path = "../nanoleaf" }
 serde = { version = "1.0", features = ["derive"] }
 structopt = "0.2"
 tokio = "0.1"

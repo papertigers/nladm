@@ -1,4 +1,4 @@
-use crate::{config, effects, state, user};
+use crate::{brightness, config, effects, state, user};
 use failure::Error;
 use nanoleaf::client::Client;
 use std::net::Ipv4Addr;
@@ -24,15 +24,21 @@ pub struct Opt {
 
 #[derive(Debug, StructOpt)]
 enum Command {
+    #[structopt(name = "brightness")]
+    /// Get or set panel brightness
+    Brightness(brightness::Brightness),
+    #[structopt(name = "effects")]
+    /// Get or set the panel effect
+    Effects(effects::Effects),
+    #[structopt(name = "identify")]
+    /// Identify panel by flashing the lights
+    Identify,
     #[structopt(name = "info")]
     /// Get panel information
     Info,
     #[structopt(name = "state")]
     /// Get or set Panel state
     State(state::State),
-    #[structopt(name = "effects")]
-    /// Get the current panel effect or set one
-    Effects(effects::Effects),
     #[structopt(name = "user")]
     /// Add/Remove Users
     User(user::User),
@@ -61,6 +67,14 @@ pub fn execute() -> Result<(), Error> {
     let client = Client::with_socketaddr(SocketAddr::new(std::net::IpAddr::V4(ip), port))?;
     let mut rt = Runtime::new().unwrap();
     match opt.cmd {
+        Command::Brightness(b) => {
+            let token = token?;
+            brightness::handle_brightness(b.brightness_type, client, &token, &mut rt)?;
+        }
+        Command::Identify => {
+            let token = token?;
+            rt.block_on(client.identify(&token))?;
+        }
         Command::Info => {
             let token = token?;
             rt.block_on(client.get_panels(&token))
